@@ -1,0 +1,10 @@
+{% extends "layout.njk" %}
+{# importando o macro, que é o bloco da visualizaçao dos produtos. #}
+{% import 'parts/section-products.njk' as section %}
+
+{% block content %}
+
+    {# Chamando a função do Macro - nome, classe e produto  #} 
+    {{section.products('Últimos Produtos', 'container', products)}} 
+
+{% endblock content %}
