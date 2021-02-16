@@ -15,6 +15,40 @@ const Mask = {
             style: 'currency', //ex:1.000,00
             currency: 'BRL' //R$
         }).format(value/100)
+    },
+    cpfCnpj(value) {
+        value = value.replace(/\D/g,"") //limpando o campo
+
+        if(value.length >14) //se ultrapassar 14 digitos, começa sempre apagar o ultimo numero deixando apenas o numero valido
+            value = value.slice(0, -1)
+
+        // verficando se é cpf (111.222.333-44) ou cnpj (11.222.333/0001-11)
+        if (value.length > 11) { //mascara cnpj 
+            value = value.replace(/(\d{2})(\d)/, '$1.$2') //11.222333000111
+            value = value.replace(/(\d{3})(\d)/, '$1.$2') //11.222.333000111
+            value = value.replace(/(\d{3})(\d)/, '$1/$2') //11.222.333/000111
+            value = value.replace(/(\d{4})(\d)/, '$1-$2') //11.222.333/0001-11
+        } else {
+            //cpf
+            value = value.replace(/(\d{3})(\d)/, '$1.$2') //111.22233344
+            value = value.replace(/(\d{3})(\d)/, '$1.$2') //111.222.33344
+            value = value.replace(/(\d{3})(\d)/, '$1-$2') //111.222.333-44
+        }
+
+        return value
+
+    },
+    cep (value) {
+        // mesma logica do cpf/cnpj
+        value = value.replace(/\D/g,"") 
+
+        if(value.length >8 ) 
+            value = value.slice(0, -1)
+
+
+        value = value.replace(/(\d{5})(\d)/, '$1-$2')   // 449000-000
+
+        return value
     }
 }
 
