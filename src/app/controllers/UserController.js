@@ -1,8 +1,17 @@
-// uma classe é um molde de objeto, definindo as suas propriedades e metodos. A classe é um constructor, um construstor de objetos.
-class UserController {
-    registerForm(req, res) {
-        return res.redirect('/products')
+// entendendo sobre heranca 
+
+class Person {
+    getName () {
+        return this.name
     }
 }
 
-module.exports = new UserController
+class Dev extends Person {
+    constructor(name) {
+        super() //o super pega tudo da classe
+        this.name = name 
+    }
+}
+
+const dev = new Dev ("diego")
+console.log(dev.getName())
