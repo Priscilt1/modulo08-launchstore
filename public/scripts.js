@@ -194,7 +194,7 @@ const ImageGallery = {
     }
 }
 
-// para dar zoom 
+// para dar zoom na imagem
 const Lightbox = {
     target: document.querySelector('.lightbox-target'),
     image: document.querySelector('.lightbox-target img'),
@@ -210,5 +210,27 @@ const Lightbox = {
         Lightbox.target.style.top = "-100%"
         Lightbox.target.style.bottom = "initial"
         Lightbox.closeButton.style.top = "-80px"
+    }
+}
+
+//validação para formato de email
+const Validate = {
+    apply(input, func) {
+        let results = Validate[func](input.value)
+        input.value = results.value
+
+        if (results.error) 
+        alert('Erro')
+    },
+    isEmail(value) {
+        let error = null
+        const mailFormat = /ˆ\w+([\.-]?\w)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        //  /ˆ\w+/ - o chapeuzinho(ˆ) significa é para quando começar, e o w é o texto sem caracte especial. 
+        //Ou seja, "comece o campo com um texto sem caracte especial. Quando coloca 0 +, significa que pode ter um ou mais caracte. o '?' permite que o caractere seja facultativo. o() formam grupos de expressões
+    
+        return {
+            error,
+            value
+        }
     }
 }

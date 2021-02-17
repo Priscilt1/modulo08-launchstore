@@ -18,7 +18,8 @@
             name="email" 
             placeholder="Digite o seu email" 
             value="{{ user.email }}"
-        >
+            onblur="Valide.apply(this. 'isEmail')"
+        >  {# onblur é quando sai do campo especifico no formulario #}
     </div>
 </div>
 
@@ -57,8 +58,8 @@
             name="cpf_cnpj" 
             placeholder="Digite seu documento" 
             value="{{ user.cpf_cnpj }}"
-            onkeydown="Mask.apply(this, 'cpfCnpj')"
-        >
+            onkeydown="Mask.apply(this, 'cpfCnpj')" 
+        >   {# onkeydown é quando tecla #}
     </div>
 </div>
 
