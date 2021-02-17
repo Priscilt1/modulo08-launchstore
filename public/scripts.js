@@ -220,14 +220,19 @@ const Validate = {
         input.value = results.value
 
         if (results.error) 
-        alert('Erro')
+            alert(results.error)
+
+        input.focus() // para o usuario ficar no input até colocar o email certo
     },
     isEmail(value) {
         let error = null
-        const mailFormat = /ˆ\w+([\.-]?\w)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         //  /ˆ\w+/ - o chapeuzinho(ˆ) significa é para quando começar, e o w é o texto sem caracte especial. 
         //Ou seja, "comece o campo com um texto sem caracte especial. Quando coloca 0 +, significa que pode ter um ou mais caracte. o '?' permite que o caractere seja facultativo. o() formam grupos de expressões
     
+        if(!value.match(mailFormat))
+            error = "Email inválido"
+
         return {
             error,
             value
