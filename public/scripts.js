@@ -216,13 +216,26 @@ const Lightbox = {
 //validação para formato de email
 const Validate = {
     apply(input, func) {
+        Validate.clearErrors(input) 
         let results = Validate[func](input.value)
         input.value = results.value
 
         if (results.error) 
-            alert(results.error)
+            Validate.displayError(input, results.error)
 
+    },
+    displayError(input, error) { //colocando a mensagem de erro abaixo do inout
+        const div = document.createElement('div')
+        div.classList.add('error')
+        div.innerHTML = error
+        input.parentNode.appendChild(div)
         input.focus() // para o usuario ficar no input até colocar o email certo
+
+    },
+    clearErrors(input){
+        const errorDiv = input.parentNode.querySelector('.error')
+        if (errorDiv)
+            errorDiv.remove() //se tiver o error div remove
     },
     isEmail(value) {
         let error = null
