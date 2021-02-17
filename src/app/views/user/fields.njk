@@ -6,7 +6,8 @@
             name="name" 
             placeholder="Digite o seu nome completo" 
             value="{{ user.name }}"
-        >
+            required 
+        > {# o required faz com que o preenchimento do campo seja obrigatorio #}
     </div>
 </div>
 
@@ -59,6 +60,7 @@
             placeholder="Digite seu documento" 
             value="{{ user.cpf_cnpj }}"
             onkeydown="Mask.apply(this, 'cpfCnpj')" 
+            onblur="Validate.apply(this, 'isCpfCnpj')"
         >   {# onkeydown é quando tecla #}
     </div>
 </div>
@@ -72,6 +74,7 @@
             placeholder="0000-000" 
             value="{{ user.cep }}"
             onkeydown="Mask.apply(this, 'cep')"
+            onblur="Validate.apply(this, 'isCep')"
         >
     </div>
 </div>
