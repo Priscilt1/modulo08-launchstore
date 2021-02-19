@@ -16,15 +16,17 @@ module.exports = {
 
 
         //verificar se usuario já existe (pelo o email e cpf/cnpj)
-        const {email, cpf_cnpj, password, passwordRepeat} = req.body
+        let {email, cpf_cnpj, password, passwordRepeat} = req.body
+
+        cpf_cnpj = cpf_cnpj.replace(/\D/g, '')
+
         //passando o filtro como objeto
         const user = await User.findOne({ 
-            where: {
-                email
-            }, or: {cpf_cnpj}
+            where: { email}, 
+            or: {cpf_cnpj}
         })
 
-        if(user) return res.send('Esse usuario já existe')
+        if(user) return res.send('Usuario já existente')
 
         //verificar se as duas senhas estão iguais 
         if(password != passwordRepeat)
