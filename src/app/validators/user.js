@@ -6,10 +6,12 @@ async function post(req, res, next) {
 
     for (key of keys) {
         if (req.body[key] == "") {
-            return res.send('Por favor, preencha todos os campos!')
+            return res.render('user/register', {
+                user: req.body, //para quando der errp, as informçÕes serem mantidas no input para o usuario nao precisar digitar tudo novamente
+                error: 'Por favor, preencha todos os campos!'
+            })
         }
     }
-
 
     //verificar se usuario já existe (pelo o email e cpf/cnpj)
     let {email, cpf_cnpj, password, passwordRepeat} = req.body
@@ -22,14 +24,17 @@ async function post(req, res, next) {
         or: {cpf_cnpj}
     })
 
+
     if(user) return res.render('user/register', {
         user: req.body, //para quando der errp, as informçÕes serem mantidas no input para o usuario nao precisar digitar tudo novamente
         error: 'Usuário já cadastrado'
     })
 
     //verificar se as duas senhas estão iguais 
-    if(password != passwordRepeat)
-        return res.send('Coloque a mesma senha')
+    if(password != passwordRepeat) return res.render('user/register', {
+        user: req.body, 
+        error: 'As senhas não conferem'
+    })
 
     next()
 }

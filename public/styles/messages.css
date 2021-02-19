@@ -1,0 +1,24 @@
+@keyframes hidemessage {
+    /* para a menssagem de erro sumir depois de cinco segundos */
+    to {
+        top:-50px;
+        opacity: 0;
+    }
+}
+
+.messages {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    position: absolute;
+    width: 100%;
+    color: white;
+    top: 0;
+    opacity: 1; /* para a animação */
+    animation: hidemessage 400ms 5s ease-in-out forwards;
+    /* velocidade da animacao (400ms), velocidade que ira sumir/delay(5s), o forwards é para a animação não voltar mais  */
+}
+
+.messages.error {
+    background-color: #e74c3c;
+}
