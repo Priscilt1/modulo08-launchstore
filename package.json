@@ -10,6 +10,7 @@
     "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,scr/app/views'"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "browser-sync": "^2.26.7",
     "express": "^4.17.1",
     "intl": "^1.2.5",
