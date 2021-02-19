@@ -22,7 +22,10 @@ async function post(req, res, next) {
            or: {cpf_cnpj}
        })
 
-       if(user) return res.send('Usuario já existente')
+       if(user) return res.render('user/register', {
+           user: req.body, //para quando der errp, as informçÕes serem mantidas no input para o usuario nao precisar digitar tudo novamente
+           error: 'Usuário já cadastrado'
+       })
 
        //verificar se as duas senhas estão iguais 
        if(password != passwordRepeat)
