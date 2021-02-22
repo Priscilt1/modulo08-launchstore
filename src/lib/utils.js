@@ -23,5 +23,39 @@ module.exports = {
       style: 'currency', //ex:1.000,00
       currency: 'BRL' //R$
     }).format(price/100)
+  },
+  formatCpfCnpj(value) {
+    //aproveitando a logica do cpf, cnpj e cep do arquivo script
+    value = value.replace(/\D/g,"")
+
+    if(value.length >14)
+        value = value.slice(0, -1)
+
+    if (value.length > 11) { 
+      //cnpj
+        value = value.replace(/(\d{2})(\d)/, '$1.$2') 
+        value = value.replace(/(\d{3})(\d)/, '$1.$2') 
+        value = value.replace(/(\d{3})(\d)/, '$1/$2') 
+        value = value.replace(/(\d{4})(\d)/, '$1-$2') 
+    } else {
+        //cpf
+        value = value.replace(/(\d{3})(\d)/, '$1.$2') 
+        value = value.replace(/(\d{3})(\d)/, '$1.$2') 
+        value = value.replace(/(\d{3})(\d)/, '$1-$2') 
+    }
+
+    return value
+
+},
+  formatCep (value) {
+      value = value.replace(/\D/g,"") 
+
+      if(value.length >8 ) 
+          value = value.slice(0, -1)
+
+
+      value = value.replace(/(\d{5})(\d)/, '$1-$2')   // 449000-000
+
+      return value
   }
 }
