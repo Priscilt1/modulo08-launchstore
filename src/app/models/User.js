@@ -1,5 +1,6 @@
 const db = require('../../config/db')
 const {hash} = require('bcryptjs') //pegando a biblioteca para criptografia das senhas
+const { update } = require('../controllers/UserController')
 
 module.exports = {
     async findOne(filters) {
@@ -51,7 +52,24 @@ module.exports = {
         }catch(err) {
             console.error(err)
         }
+    },
+    async update(id, fields) {
+        let query = "UPDATE users SET"
 
-    
+        Object.keys(fields).map((key, index, array) => {
+            if((index + 1) < array.length) {
+                query = `${query}
+                    ${key} = '${fields[key]}',
+                `
+            } else {
+                query = `${query}
+                    ${key} = '${fields[key]}'
+                    WHERE id = ${id}
+                `
+            }
+        })
+
+        await db.query(query)
+        return
     }
 }
