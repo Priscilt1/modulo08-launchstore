@@ -38,9 +38,8 @@ module.exports = {
             })
 
             return res.render('user/index', {
-                sucess: 'Conta atualizada com sucesso!'
+                success: 'Conta atualizada com sucesso!'
             })
-
 
         }catch {
             console.error(err)
