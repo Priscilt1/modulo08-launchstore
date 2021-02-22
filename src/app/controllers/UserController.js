@@ -6,12 +6,7 @@ module.exports = {
         return res.render('user/register')
     },
     async show(req, res) {
-        const { userId: id} = req.session
-        const user = await User.findOne({ where: {id} })
-
-        if (!user) return res.render('user/register', {
-            error: 'Usúario não encontrado!'
-        })
+        const { user } = req
 
         // formantando cpf/cnpj e cep
         user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
@@ -26,5 +21,8 @@ module.exports = {
         req.session.userId = userId //chamando a sessao
 
         return res.redirect('/users')
+    },
+    async update(req, res) {
+    
     }
 }
