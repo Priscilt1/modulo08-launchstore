@@ -16,12 +16,12 @@ routes.get('/search', SearchController.index)
 // Products
 routes.get ('/create', redirectToLogin, ProductController.create)
 routes.get('/:id', ProductController.show)
-routes.get ('/:id/edit', ProductController.edit)
+routes.get ('/:id/edit', redirectToLogin, ProductController.edit)
 
 // multer.array("photos", 6) pega a lista de fotos e limita em 6
-routes.post('/', multer.array("photos[]", 6), ProductController.post) //postar
-routes.put('/',  multer.array("photos[]", 6), ProductController.put) //atualizar
-routes.delete('/', ProductController.delete)
+routes.post('/', redirectToLogin, multer.array("photos[]", 6), ProductController.post) //postar
+routes.put('/',  redirectToLogin, multer.array("photos[]", 6), ProductController.put) //atualizar
+routes.delete('/', redirectToLogin, ProductController.delete)
 
 
 module.exports = routes
