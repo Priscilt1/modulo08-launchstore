@@ -1,4 +1,6 @@
-const crypto = require('crypto') // modulo para criação do token
+const User = require('../models/User')
+
+const crypto = require('crypto') // modulo para criação do token (do proprio node)
 const mailer = require('../../lib/mailer') //biblioteca para criação dos emails 
 
 module.exports = {
@@ -16,9 +18,10 @@ module.exports = {
     forgotForm(req, res) {
         return res.render('session/forgot-password')
     },
-    forgot(req, res) {
+    async forgot(req, res) {
         const user = req.user
 
+        try {
         //um token para esse usuario
         const token = crypto.randomBytes(20).toString('hex')
 
@@ -28,7 +31,7 @@ module.exports = {
 
         await User.update(user.id, {
             reset_token: token,
-            reset_token_expires:now
+            reset_token_expires: now
         })
 
         //enviar um email com um link de recuperação de senha
@@ -39,7 +42,7 @@ module.exports = {
             html: `<h2> Perdeu a chave?</h2>
             <p> Não se preocupe, click no link abaixo para sua senha</p>
             <p>
-                <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank>
+                <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank">
                     RECUPERAR SENHA
                 </a>
             </p>
@@ -48,7 +51,14 @@ module.exports = {
 
         // avisar o usuario que enviamos o email
         return res.render('session/forgot-password', {
-            sucess: 'Verifique o seu email cadastrado para resetar a senha!'
+            success: 'Verifique o seu email cadastrado para resetar a senha!'
         })
+
+        }catch(err) {
+            console.error(err) 
+            return res.render('session/forgot-password', {
+                error: 'Erro inesperando. Tente novamente!'
+            })
+        }
     }
 }

@@ -12,7 +12,7 @@ const { isLoggedRedirectToLogin, redirectToLogin} = require('../app/middlewares/
 //CONTROLE DE USUARIO
 //login/logout
 routes.get('/login', isLoggedRedirectToLogin, SessionController.loginForm)
-routes.post('/login',SessionValidator.login, SessionController.login)
+routes.post('/login', SessionValidator.login, SessionController.login)
 routes.post('/logout', SessionController.logout)
 
 
