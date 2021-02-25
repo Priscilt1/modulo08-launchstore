@@ -46,7 +46,7 @@ async function forgot(req, res, next) {
 
 async function reset(req, res, next) {
     //ver se o usuario existe
-    const { email, password, token } = req.body
+    const { email, password, token, passwordRepeat } = req.body
     const user = await User.findOne({ where: {email} })
 
     if (!user) return res.render('session/password-reset', {
@@ -56,12 +56,13 @@ async function reset(req, res, next) {
     })
 
     //ver se a senha é compativel
-    if(password != passwordRepeat) return res.render('session/password-reset', {
-        user: req.body,
-        token,
-        error: 'A senha e a repetição da senha estão incorretas'
-    })
-
+    console.log(password === passwordRepeat)
+   if (password !== passwordRepeat) return res.render('session/password-reset', {
+       user: req.body,
+       token,
+       error: 'A senha e a repetição da senha estão incorretas'
+   })
+                                                           
     //verificar se o token é compativel
     if (token != user.reset_token) return res.render('session/password-reset', {
         user: req.body,

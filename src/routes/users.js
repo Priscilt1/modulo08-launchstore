@@ -16,14 +16,14 @@ routes.post('/login', SessionValidator.login, SessionController.login)
 routes.post('/logout', SessionController.logout)
 
 
-// //reset passaword / forgot
+//reset passaword / forgot
 routes.get('/forgot-password', SessionController.forgotForm)
 routes.get('/password-reset', SessionController.resetForm)
 routes.post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
-routes.post('/password-reset', SessionController.reset)
+routes.post('/password-reset', SessionValidator.reset, SessionController.reset)
 
 
-// //user register UserControoler - criação, atualização e remocao
+//user register UserControoler - criação, atualização e remocao
 routes.get('/register', UserController.registerForm)
 routes.post('/register', UserValidator.post, UserController.post)
 
