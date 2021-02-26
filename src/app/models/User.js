@@ -1,6 +1,9 @@
 const db = require('../../config/db')
 const {hash} = require('bcryptjs') //pegando a biblioteca para criptografia das senhas
-const { update } = require('../controllers/UserController')
+// const { update } = require('../controllers/UserController')
+const fs = require('fs') //FileSistem para deletar os arquivos do usuario
+const Product = require('../models/Product')
+
 
 module.exports = {
     async findOne(filters) {
@@ -71,5 +74,25 @@ module.exports = {
 
         await db.query(query)
         return
+    },
+    async delete(id) {
+        //pegar todos os produtos
+        let results = await Product.all()
+        const products = results.rows
+
+        //dos produtos, pegar todas as imagens/arquivos
+        const allFilesPromise = products.map(product =>
+            Product.files(product.id))
+
+        let promiseResults = await Promise.all(allFilesPromise) //array com as promessas resolvidas
+
+        //rodar a remocao do usuario 
+        await db.query('DELETE FROM users WHERE id = $1', [1])
+
+        //remover as imagens da pasta public
+        promiseResults.map(results => { //lembrando que é um result para cada produto, ou seja, cada produto com os arquivos
+            results.rows.map(file => fs.unlinkSync(file.path))
+        })
+
     }
 }
