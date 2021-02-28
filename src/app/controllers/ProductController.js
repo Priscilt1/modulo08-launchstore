@@ -2,7 +2,7 @@ const { formatPrice, date } = require('../../lib/utils')
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
-
+const fs = require('fs')
 
 module.exports = {
     create(req, res) {
@@ -29,15 +29,12 @@ module.exports = {
         }
 
         // configuração para armanezamento da imagem 
-
         if(req.files.length == 0)
             return res.send('Por favor, selecione no minino uma imagem!')
 
-
+        req.body.user_id = req.session.userId
         // dados para salvar - req.body
-        let results = await Product.create(req.body)
-        // ASYNC-AWAIT - permite trabalhar com promises sem a cadeia de thein
-        // toda vez que usar o await, precisa colocar o nome async na frente da função
+        let results = await Product.create(req.body) // ASYNC-AWAIT - permite trabalhar com promises sem a cadeia de thein
         const productId = results.rows[0].id
 
         // criando um array de promessas com o map retornando um array
@@ -136,7 +133,8 @@ module.exports = {
         return res.redirect(`/products/${req.body.id}`)
     },
     async delete (req, res) {
-        await Product.delete(req.body.id)
+         await Product.delete(req.body.id)
+
         return res.redirect('/products/create')
     }
 }
