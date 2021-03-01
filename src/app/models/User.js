@@ -22,8 +22,7 @@ const User = {
     //         RETURNING id
     //         `
     //         //hash de senha - criptografia de senha 
-    //         // instalando a biblioteca bcryptjs
-    //         const passwordHash = await hash(data.password, 8) //a força da senha sera 8
+    //         const passwordHash = await hash(data.password, 8)
 
     //         const values = [
     //             data.name,
@@ -36,6 +35,7 @@ const User = {
 
     //         const results = db.query(query, values)
     //         return (await results).rows[0].id
+
     //     }catch(err) {
     //         console.error(err)
     //     }
@@ -86,6 +86,5 @@ const User = {
     // }
 }
 
-console.log(User)
 
 module.exports = User
