@@ -1,14 +1,16 @@
-// const db = require('../../config/db')
-// const {hash} = require('bcryptjs') //pegando a biblioteca para criptografia das senhas
-// const fs = require('fs') //FileSistem para deletar os arquivos do usuario
-// const Product = require('../models/Product')
 const Base = require('./Base')
 
 Base.init ({ table: 'users '}) //iniciando a tabla (pegando no Base)
 
 const User = {
     ...Base,
-    // async create(data) {
+   
+}
+
+module.exports = User
+
+
+ // async create(data) {
     //     try{
     //         const query = `
     //         INSERT INTO users (
@@ -84,7 +86,3 @@ const User = {
     //         })
     //     })
     // }
-}
-
-
-module.exports = User
