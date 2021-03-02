@@ -1,9 +1,9 @@
 const User = require('../models/User')
+const crypto = require('crypto') // modulo para criação do token (do proprio node)
+const mailer = require('../../lib/mailer') //biblioteca para criação dos emails 
 
 const { hash } = require('bcryptjs')
 
-const crypto = require('crypto') // modulo para criação do token (do proprio node)
-const mailer = require('../../lib/mailer') //biblioteca para criação dos emails 
 
 module.exports = {
     loginForm(req, res) {
