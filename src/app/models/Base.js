@@ -37,14 +37,15 @@ const Base = {
     }, 
     async create(fields) { // será um objeto 
         try {
-            let keys = "",
-                values = ""
+            let keys = [],
+                values = []
 
             Object.keys(fields).map(key => {
                 //keys = chave = name, age, address 
                 //values = 'Priscila', '25', 'Rua auhuhaushhasoshaoi'
                 keys.push(key) //transformando em um array, colocando a virgula necessaria na posicao dos valores
-                values.push(fields[key])
+                values.push(`'${fields[key]}'`)
+            })
 
                 const query = `INSERT INTO ${this.table} (${keys.join(',')})
                     VALUES (${values.join(',')})
@@ -53,7 +54,7 @@ const Base = {
                 const results = await db.query(query) 
                 return results.rows[0].id
 
-            })
+            
         } catch(error) {
             console.error(error)
         }
