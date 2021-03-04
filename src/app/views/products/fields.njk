@@ -48,8 +48,8 @@
             <p>Selecione até 6 Fotos</p>
        </div>
        <div id="photos-preview">
-            {% if files %}
-                {% for image in files %}
+            {% if product.files %}
+                {% for image in product.files %}
                     <div class="photo" id="{{image.id}}">
                         <img src="{{image.src}}" alt="{{image.name}}">
                         <i class="material-icons"
@@ -72,7 +72,7 @@
             type="text" 
             name="price" 
             placeholder="Preço do produto" 
-            value="{{ product.price }}"
+            value="{{ product.formattedPrice }}"
             {# pegando a função do script - mascara de dinheiro #}
             {# o THIS referencia ao input #}
             onkeydown="Mask.apply(this, 'formatBRL')"   
@@ -80,7 +80,7 @@
     </div>
 
     {% if product.old_price %}
-        <input type="hidden" name="old_price" value={{product.old_price}}>
+        <input type="hidden" name="old_price" value={{product.formattedOldPrice}}>
     {% endif %} 
 </div>
 
