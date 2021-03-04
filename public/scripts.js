@@ -280,5 +280,21 @@ const Validate = {
             error,
             value
         }
+    },
+    allFields(event) { //verificação dos fields
+        const items = document.querySelectorAll('.item input, .item select, .item textarea') //pegando todos os elementos do fields para fazer a verificação
+
+        for ( item of items ) {
+            if(item.value == "") {
+                const message = document.createElement('div')
+                message.classList.add('messages')
+                message.classList.add('error')
+                message.style.position = 'fixed'
+                message.innerHTML = 'Todos os campos devem ser preenchidos'
+                document.querySelector('body').append(message) //colocando no body
+
+                event.preventDefault()
+            }
+        }
     }
 }
