@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const SessionController = require('../app/controllers/SessionController')
 const UserController = require('../app/controllers/UserController')
+const OrderController = require('../app/controllers/OrderController')
 
 const UserValidator = require('../app/Validators/user')
 const SessionValidator = require('../app/Validators/session')
@@ -32,6 +33,7 @@ routes.put('/', UserValidator.update, UserController.update)
 routes.delete('/', UserController.delete)
 
 routes.get('/ads', UserController.ads)
+routes.post('/orders', redirectToLogin, OrderController.post) //rotas para pedidos
 
 
 module.exports = routes

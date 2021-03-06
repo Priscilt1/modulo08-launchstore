@@ -1,5 +1,5 @@
 /* PRODUCT VIEW */
-.product-single .card-content{
+.product-single .card-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 24px;
