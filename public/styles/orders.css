@@ -1,0 +1,33 @@
+.order-success,
+.order-error {
+    padding: 0;
+    padding-bottom: 112px;
+    text-align: center;
+    margin: auto;
+}
+
+.order-success .success-lottie,
+.order-error .error-lottie {
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.order-success a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.order-error a {
+    color:red;
+    font-weight: bold;
+}
+
+.order-success a:hover,
+.order-error a:hover {
+    text-decoration: underline;
+}
+
+.order-error,
+.order-error {
+    line-height: 24px;
+}
