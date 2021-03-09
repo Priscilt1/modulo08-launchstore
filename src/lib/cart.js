@@ -3,7 +3,7 @@ const { formatPrice } = require('./utils')
 //carinho fica guardado na sessao (req.session)
 
 const Cart = {
-    init(oldCart) {
+    init(oldCart) { //carinho antigo
         if(oldCart) {
             this.items = oldCart.items //[{ product: {}. price, quantity, formatted, {} }]
             this.total = oldCart.total
@@ -19,7 +19,7 @@ const Cart = {
     },
     addOne(product) {    //adicionar 1 item ao carrinho
         //ver se um produto ja existe no carrinho 
-        let inCart = this.items.find(item => item.product.id == product.id)
+        let inCart = this.getCartItem(product.id)
 
         //se nao existir 
         if (!inCart) {
@@ -54,7 +54,7 @@ const Cart = {
     },
     removeOne(productId) { //remover 1 item do carrinho 
         //pegar o item do carrinho 
-        const inCart = this.items.find(items => item.product.id == productId)
+        const inCart = this.getCartItem(productId)
 
         if(!inCart) return this
 
@@ -72,24 +72,31 @@ const Cart = {
         if(inCart.quantity < 1) {
             this.items = this.items.filter(item => 
                 item.product.id != inCart.product.id)
-                
+
             return this
         }
 
         return this
 
     },
-    delete(productId) {
-    //deletar todo item
+    delete(productId) { //deletar todo item
+        const inCart = this.getCartItem(productId)
+        if(!inCart) return this
+
+        if(this.items.lenght > 0) {
+            this.total.quantity -= inCart.quantity
+            this.total.price -= (inCart.product.price * inCart.quantity) //substraindo no valor total o preço do produto que foi removido
+            this.total.formattedPrice = formatPrice(this.total.price)
+        }
+
+        this.items = this.items.filter(item => inCart.product.id != item.product.id)
+        return this
+
+    },
+    getCartItem(productId) { //pegando item no carrinho 
+        return this.items.find(item => item.product.id == productId)
     }
 }
 
-const product = {
-    id: 1,
-    price: 199,
-    quantity: 2
-}
-
-console.log(Cart.init().addOne(product))
 
 module.exports = Cart
