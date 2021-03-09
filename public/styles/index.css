@@ -52,10 +52,12 @@ footer {
 
     /* para colocar o botao para baixo */
     align-self: end;
+    opacity: 1;
 }
 
 .button:hover{
-    background-color: #eb8510;
+    opacity: 0.9;
+    cursor: pointer;
 }
 
 .button.edit {
@@ -391,8 +393,6 @@ form .item #photos-preview img {
     color:black;
     font-weight: bold;
 }
-
-
 
 /* validate errors */
 .input .error {
