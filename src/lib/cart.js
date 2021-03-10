@@ -83,7 +83,7 @@ const Cart = {
         const inCart = this.getCartItem(productId)
         if(!inCart) return this
 
-        if(this.items.lenght > 0) {
+        if(this.items.length > 0) {
             this.total.quantity -= inCart.quantity
             this.total.price -= (inCart.product.price * inCart.quantity) //substraindo no valor total o preço do produto que foi removido
             this.total.formattedPrice = formatPrice(this.total.price)

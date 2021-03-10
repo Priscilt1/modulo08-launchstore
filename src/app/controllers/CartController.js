@@ -57,6 +57,7 @@ module.exports = {
         let { cart } = req.session
 
         if (!cart) return
+        console.log(req.session.cart)
 
         req.session.cart = Cart.init(cart).delete(id)
 
