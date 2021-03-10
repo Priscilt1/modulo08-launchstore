@@ -120,3 +120,17 @@
 .cart .button.order:hover {
     opacity: 0.9;
 }
+
+/* carrinho vazio */
+.cart-empty {
+    text-align: center;
+}
+
+.cart-empty {
+    font-size: 18px;
+}
+
+.cart-empty .button {
+    width: 240px;
+    margin: 16px auto;
+}
